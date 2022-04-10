@@ -1,0 +1,212 @@
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Index</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/animate.min.css">
+    <link rel="stylesheet" href="./css/fontawesome.min.css">
+    <link rel="stylesheet" href="./css/FontReference.css">
+    <link href="./css/DataTable/jquery.dataTables.css" rel="stylesheet">
+    <link href="./css/DataTable/responsive.dataTables.css" rel="stylesheet">
+    <link href="./css/JqueryToast/toastr.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+
+
+    <style>
+        .CustomTable {
+            color: #000;
+            width: 100%;
+            border: 1px solid gainsboro;
+            font-size: 16px;
+        }
+
+        .CustomTable tr th {
+            padding: 13px 7px;
+            font-weight: bold;
+            vertical-align: middle !important;
+        }
+
+        .CustomTable tr td {
+            padding: 8px 6px;
+            border: 1px solid gainsboro;
+            vertical-align: middle !important;
+        }
+
+        .CustomTable.DarkTable thead tr:first-child {
+            background: #3a708c;
+            color: #fff;
+            border: 1px solid #3a708c;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div dir="rtl" class="d-md-flex justify-content-md-between text-center" style="background: #def3ff70">
+        <div class="logo">
+            <a href="/Home/Index">
+                <img src="./images/logo2_V.png" alt="logo" class="my-2 mx-3">
+            </a>
+        </div>
+        <div class="header-btn d-flex justify-content-md-between justify-content-center my-0 py-2 py-sm-0">
+            <div class="header-btn-edit d-sm-flex justify-content-md-between justify-content-center my-auto mx-2">
+                <a class="d-block ml-2 mt-1 mt-sm-0" href="/UserManagement/Index">
+                    کاربران سایت
+                    <i class="fa fa-user mr-1 icon"></i>
+                </a>
+                <a class="d-block ml-2 mt-1 mt-sm-0" href="/Employees/Index">
+                    اطلاعات کارمندان
+                    <i class="fa fa-users mr-1 icon"></i>
+                </a>
+                <a class="d-block ml-2 mt-1 mt-sm-0" href="/Holidays/Index">
+                    تاریخ تعطیلی ها
+                    <i class="fa fa-calendar-day mr-1 icon"></i>
+                </a>
+                <a class="d-block mt-1 mt-sm-0" href="/Home/Index">
+                    محاسبه کارکرد
+                    <i class="fa fa-file-excel mr-1 icon"></i>
+                </a>
+            </div>
+            <div class=" header-btn-out my-auto mx-3">
+                <a class="d-flex" href="/Accounts/Logout">
+                    <i class="fa fa-power-off"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div dir="rtl" class="px-1 px-md-2 px-lg-4 px-xl-5 mt-5 pb-5 text-right">
+        <h4>لیست تاریخ تعطیلی ها</h4>
+        <hr>
+
+        <div class="d-flex justify-content-start mt-5">
+            <a class="btn btn-info" href="/Holidays/create">افزودن تاریخ تعطیلی جدید</a>
+        </div>
+        <div style="overflow-x:auto;">
+            <table class="CustomTable DarkTable mt-4">
+                <thead>
+                    <tr>
+                        <th>
+                            برچسب تاریخ
+                        </th>
+                        <th>
+                            اولین جمعه ماه
+                        </th>
+                        <th>
+                            تاریخ تعطیلی ها
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            1400/05
+                        </td>
+                        <td>
+                            1400/05/01
+                        </td>
+                        <td>
+                            1400/05/07-1400/05/28
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-success mx-1 mt-1" href="/Holidays/Edit/2">
+                                ویرایش <i class="fa fa-edit"></i>
+                            </a>
+                            <button onclick="$('#RemovedHolidayInput').val(2);" class="btn btn-sm btn-danger mx-1 mt-1"
+                                data-toggle="modal" data-target="#removeHolidaysModal">
+                                حذف <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            1400/07
+                        </td>
+                        <td>
+                            1400/07/02
+                        </td>
+                        <td>
+                            1400/07/05-1400/07/13-1400/07/15
+                        </td>
+                        <td>
+                            <a class="btn btn-sm btn-success mx-1 mt-1" href="/Holidays/Edit/3">
+                                ویرایش <i class="fa fa-edit"></i>
+                            </a>
+                            <button onclick="$('#RemovedHolidayInput').val(3);" class="btn btn-sm btn-danger mx-1 mt-1"
+                                data-toggle="modal" data-target="#removeHolidaysModal">
+                                حذف <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="removeHolidaysModal" tabindex="-1" role="dialog"
+        aria-labelledby="removeHolidaysModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-right" id="exampleModalLongTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body text-right">
+                    <h5 class="py-4">آیا از حذف تاریخ تعطیلی های این ماه اطمینان دارید؟</h5>
+                    <form action="/Holidays/Delete" method="post">
+                        <input id="RemovedHolidayInput" type="hidden" name="id" value="">
+
+                        <div class="d-flex justify-content-start mt-5">
+                            <button type="submit" class="btn btn-danger mx-1">حذف</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                        </div>
+                        <input name="__RequestVerificationToken" type="hidden"
+                            value="CfDJ8FHAzrsgjx9Lni-LSzBp6ytZHQoV42j8WUJObvpWd0mKkhWHnOXZQRTmYeMZ-GXZCEMjBf2GUoFqvUFU3roq71NvXuHZZ6dQiwXMMlq9hbnN5jXLS7wesop_NCdbxxj7eRL39VfLeojQkKua2fOPx24gsJ562X1x3WKA-3s9sZOa8ZO8vNpuQhHj0Ut1wFwkWQ">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+.
+
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="./js/fontawesome.min.js"></script>
+    <script src="./js/xls.core.min.js"></script>
+    <script src="./js/xlsx.core.min.js"></script>
+    <script src="./js/JqueryToast/toastr.min.js"></script>
+    <script src="./js/jalaliMoment.js"></script>
+
+    <script src="./js/DataTable/jquery.dataTables.js"></script>
+    <script src="./js/DataTable/dataTables.dataTables.js"></script>
+    <script src="./js/DataTable/dataTables.buttons.js"></script>
+    <script src="./js/DataTable/buttons.html5.js"></script>
+    <script src="./js/DataTable/buttons.print.js"></script>
+    <script src="./js/DataTable/pdfmake.js"></script>
+    <script src="./js/DataTable/vfs_fonts.js"></script>
+
+
+
+
+
+</body>
+
+</html>

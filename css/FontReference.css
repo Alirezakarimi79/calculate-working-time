@@ -1,0 +1,44 @@
+@font-face {
+    font-family: 'Sahel';
+    src: url('../fonts/Sahel.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Sahel-SemiBold';
+    src: url('../fonts/Sahel-SemiBold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Sahel-SemiBold_woff';
+    src: url('../fonts/Sahel-SemiBold.woff') format('woff');
+}
+@font-face {
+    font-family: 'Sahel-Bold';
+    src: url('../fonts/Sahel-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'fontawesome-webfont';
+    src: url('../fonts/fontawesome-webfont.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'SahelPN';
+    src: url('../fonts/SahelPN.ttf') format('truetype');
+    src: url('../fonts/SahelPN.woff') format('woff');
+}
+@font-face {
+    font-family: 'IranNastaliq';
+    src: url('../fonts/IranNastaliq.ttf') format('truetype');
+    src: url('../fonts/IranNastaliq.woff') format('woff');
+}
+@font-face {
+    font-family: 'IranNastaliqPN';
+    src: url('../fonts/IranNastaliqPN.ttf') format('truetype');
+    src: url('../fonts/IranNastaliqPN.woff') format('woff');
+    src: url('../fonts/IranNastaliqPN.woff2') format('woff2');
+}
+@font-face {
+    font-family: 'BLotus';
+    src: url('../fonts/BLotus.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'BLotusBold';
+    src: url('../fonts/BLotusBold.ttf') format('truetype');
+}

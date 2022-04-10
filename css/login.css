@@ -1,0 +1,259 @@
+body {
+    min-height: 100vh;
+    font-family: "Sahel", sans-serif;
+}
+
+.container-login {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#login-button {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 30px;
+    margin: auto;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: #ffffffff;
+    overflow: hidden;
+    opacity: 1;
+    box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000000000;
+}
+
+.logo {
+    width: 160px;
+    height: auto;
+}
+
+.text-login-btn {
+    font-family: "Sahel-Bold";
+    font-weight: 700;
+    font-size: 14px;
+    color: #333;
+}
+
+.top-active::before,
+.top-active::after,
+.bottom-active::before,
+.bottom-active::after {
+    margin-left: 250px !important;
+    transform-origin: -250px 50% !important;
+    transition-delay: 0s !important;
+}
+
+.center-active {
+    opacity: 1 !important;
+    transition-delay: 0.2s !important;
+}
+
+.top:before,
+.top:after,
+.bottom:before,
+.bottom:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 200vmax;
+    height: 200vmax;
+    top: 50%;
+    left: 50%;
+    margin-top: -100vmax;
+    transform-origin: 0px 50%;
+    transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+    z-index: 10;
+    opacity: 0.65;
+    transition-delay: 0.2s;
+}
+
+.top:before {
+    transform: rotate(45deg);
+    background: #caf0f8;
+}
+
+.top:after {
+    transform: rotate(135deg);
+    background: #90e0ef;
+}
+
+.bottom:before {
+    transform: rotate(-45deg);
+    background: #00b4d8;
+}
+
+.bottom:after {
+    transform: rotate(-135deg);
+    background: #0077b6;
+}
+
+.center {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.445, 0.05, 0, 1);
+    transition-delay: 0s;
+    color: #333;
+}
+
+.container-form {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 2rem;
+}
+
+.login-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+}
+
+form {
+    width: 360px;
+}
+
+.title {
+    margin-bottom: 3rem;
+    color: #333;
+    text-transform: uppercase;
+    font-size: 2rem;
+}
+
+.login-content .input-div {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 25px 0;
+    padding: 5px 0;
+    border-bottom: 2px solid #d9d9d9;
+}
+
+.login-content .input-div.one {
+    margin-top: 0;
+}
+
+.i {
+    color: #d9d9d9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.i i {
+    transition: .3s;
+}
+
+.input-div>div {
+    position: relative;
+    height: 45px;
+}
+
+.input-div>div>h5 {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+    font-size: 18px;
+    transition: .3s;
+}
+
+.input-div:before,
+.input-div:after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background-color: #40f2ff;
+    transition: .4s;
+}
+
+.input-div:before {
+    right: 50%;
+}
+
+.input-div:after {
+    left: 50%;
+}
+
+.input-div.focus:before,
+.input-div.focus:after {
+    width: 50%;
+}
+
+.input-div.focus>div>h5 {
+    top: -5px;
+    font-size: 15px;
+}
+
+.input-div.focus>.i>i {
+    color: #40f2ff;
+}
+
+.input-div>div>input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0.5rem 0.7rem;
+    font-size: 1.2rem;
+    color: #555;
+    font-family: 'poppins', sans-serif;
+}
+
+.input-div.pass {
+    margin-bottom: 4px;
+}
+
+.btn-login {
+    display: block;
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    outline: none;
+    border: none;
+    background: linear-gradient(to right, #4fe0eb, #50cad3, #008ba3);
+    background-size: 200%;
+    font-size: 1.2rem;
+    color: #fff;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    margin: 3rem 0;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.btn-login:hover {
+    background-position: right;
+}
+
+@media screen and (max-width: 1000px) {
+    form {
+        width: 290px;
+    }
+}

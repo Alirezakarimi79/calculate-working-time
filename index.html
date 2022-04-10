@@ -1,0 +1,561 @@
+<html lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>کارکرد ماهانه</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/animate.min.css">
+    <link rel="stylesheet" href="./css/fontawesome.min.css">
+    <link rel="stylesheet" href="./css/FontReference.css">
+    <link href="./css/DataTable/jquery.dataTables.css" rel="stylesheet">
+    <link href="./css/DataTable/responsive.dataTables.css" rel="stylesheet">
+    <link href="./css/JqueryToast/toastr.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div dir="rtl" class="d-md-flex justify-content-md-between text-center" style="background: #def3ff70">
+        <div class="logo">
+            <a href="/Home/Index">
+                <img src="./images/logo2_V.png" alt="logo" class="my-2 mx-3">
+            </a>
+        </div>
+        <div class="header-btn d-flex justify-content-md-between justify-content-center my-0 py-2 py-sm-0">
+            <div class="header-btn-edit d-sm-flex justify-content-md-between justify-content-center my-auto mx-2">
+                <a class="d-block ml-2 mt-1 mt-sm-0" href="/UserManagement/Index">
+                    کاربران سایت
+                    <i class="fa fa-user mr-1 icon"></i>
+                </a>
+                <a class="d-block ml-2 mt-1 mt-sm-0" href="/Employees/Index">
+                    اطلاعات کارمندان
+                    <i class="fa fa-users mr-1 icon"></i>
+                </a>
+                <a class="d-block ml-2 mt-1 mt-sm-0" href="/Holidays/Index">
+                    تاریخ تعطیلی ها
+                    <i class="fa fa-calendar-day mr-1 icon"></i>
+                </a>
+                <a class="d-block mt-1 mt-sm-0" href="/Home/Index">
+                    محاسبه کارکرد
+                    <i class="fa fa-file-excel mr-1 icon"></i>
+                </a>
+            </div>
+            <div class=" header-btn-out my-auto mx-3">
+                <a class="d-flex" href="/Accounts/Logout">
+                    <i class="fa fa-power-off"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+    <input name="__RequestVerificationToken" type="hidden"
+        value="CfDJ8FHAzrsgjx9Lni-LSzBp6yt5fHwHSVfpgm7rYoc8w0D0iMBVgFZYAxStyNgI5dg-6geczg0IMeDIesUUSURrX_b0wY7Q66M3quBuvFJNLTKFZafgJDPvhnXDlWYOifXsAy9at4Zcx-8XXjsOx28s1tlDAnI5s77qIaAOmvlnX5YbKZtvamECQ2MtZ1V08-BDyg">
+
+    <div id="CustomLoading">
+        <div class="w-100 h-100 d-flex justify-content-center align-items-center"
+            style="background:rgba(193, 193, 193, 0.3)">
+            <div class="mx-2">
+                <h4 dir="rtl" class="text-info">درحال انجام عملیات ...</h4>
+            </div>
+            <div class="spinner-border text-info" role="status" style="width:3.3rem;height:3.3rem;border-width:0.35rem">
+                <span class="sr-only"></span>
+            </div>
+        </div>
+    </div>
+
+    <section class="wrapper h-100" dir="rtl" id="mainSection">
+        <header class="header d-md-block">
+            <section>
+                <div class="px-0">
+                    <div class="file row mx-0 pt-4">
+                        <div class="file-upload col-12 col-md-8">
+                            <div class="row mx-0 w-100 px-xl-5">
+                                <div class="col-12 col-lg-5 col-xl-4 px-2">
+                                    <input type="file" name="file" id="excelFile" class="input-file"
+                                        accept=".xls,.xlsx">
+                                    <label for="excelFile" id="excelFile-label"
+                                        class="label-file ml-2 py-4 px-3 d-none d-md-block mb-2">
+                                        <div class="px-2 py-4">
+                                            <h4 class="label-header-file">بارگذاری فایل ورود خروج</h4>
+                                            <div class="label-upload-file d-flex px-2 py-4 mt-5">
+                                                <i class="fa fa-folder-open label-icon-file"></i>
+                                                <p class="mt-3">فایل خود را انتخاب کنید یا بکشید و اینجا رها کنید</p>
+                                            </div>
+                                        </div>
+                                        <div class="ExcelFileInfo">
+
+                                        </div>
+                                    </label>
+                                    <div class="row mx-0 d-block d-md-none mb-5">
+                                        <h4 class="label-header-file mb-3 w-100">بارگذاری فایل ورود خروج:</h4>
+                                        <input type="file" name="file" id="excelFile" class="input-file"
+                                            accept=".xls,.xlsx">
+                                        <label class="label-upload-file-btn btn" for="excelFile">
+                                            انتخاب فایل
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-5 col-xl-4 px-2">
+                                    <input type="file" name="file" id="vacationFile" class="input-file"
+                                        accept=".xls,.xlsx">
+                                    <label for="vacationFile" id="vacationFile-label"
+                                        class="label-file ml-2  py-4 px-3 d-none d-md-block mb-2">
+                                        <div class="px-2 py-4">
+                                            <h4 class="label-header-file">بارگذاری فایل مرخصی</h4>
+                                            <div class="label-upload-file d-flex px-2 py-4 mt-5">
+                                                <i class="fa fa-folder-open label-icon-file"></i>
+                                                <p class="mt-3">فایل خود را انتخاب کنید یا بکشید و اینجا رها کنید</p>
+                                            </div>
+                                        </div>
+                                        <div class="ExcelFileInfo">
+
+                                        </div>
+                                    </label>
+                                    <div class="row mx-0 d-block d-md-none">
+                                        <h4 class="label-header-file text-center mb-3 w-100 text-right">
+                                            بارگذاری فایل
+                                            مرخصی:
+                                        </h4>
+                                        <input type="file" name="file" id="vacationFile" class="input-file"
+                                            accept=".xls,.xlsx">
+                                        <label class="label-upload-file-btn btn text-center ml-0 mr-auto"
+                                            for="vacationFile">
+                                            انتخاب فایل
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 px-2 mb-5">
+                            <button type="button" id="showDetailsPresence" class="btn main-btn mt-5 px-5 py-2">
+                                نمایش اطلاعات کاربر
+                                <i class="fa fa-file-export"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </header>
+    </section>
+
+
+    <section dir="rtl" id="showDetails" style="display: none" class="mt-5 px-2 pb-5">
+        <div class="back mb-3 mx-2 d-sm-flex justify-content-between">
+            <div>
+                <button data-toggle="modal" data-target="#SaveEmployeeWorkInfoModal"
+                    class="btn btn-info rounded mt-1 mt-1">
+                    ذخیره اطلاعات در سامانه
+                </button>
+                <button data-toggle="modal" data-target="#LoadEmployeeWorkInfoModal"
+                    class="btn btn-outline-dark rounded mt-1">
+                    بازنشانی اطلاعات از سامانه
+                </button>
+            </div>
+            <div>
+                <button id="ShowExcelErrors" class="btn btn-danger rounded mx-1" data-toggle="modal"
+                    data-target="#ExcelErrorsModal">
+                    مشاهده خطاها <small class="badge badge-pill badge-light text-danger"></small>
+                </button>
+                <button id="goToAllDetails" class="btn btn-secondary rounded mx-1 mt-1">
+                    نمایش جزئیات
+                </button>
+                <button id="SaveAllUsersData" class="btn btn-outline-success rounded mt-1">
+                    ذخیره تغییرات همه کاربران <i class="fa fa-check" style="display:none;"></i>
+                </button>
+            </div>
+        </div>
+        <div id="WorkTimeTableContainer" class="px-4 pb-5">
+            <div id="allUserTable" style="overflow-x:auto;" class="hip-grid">
+
+            </div>
+        </div>
+    </section>
+
+
+    <section dir="rtl" id="showAllDetails" style="display: none" class="mt-5 px-2 pb-5">
+        <div class="back mb-3 mx-2 d-flex justify-content-between">
+            <button id="returnToShowDetailsBtn" class="btn btn-info rounded mt-1">
+                <i class="fa fa-arrow-right"></i>
+                بازگشت
+            </button>
+            <div class="d-flex">
+                <button id="ShowErrors" class="btn btn-danger rounded mx-1 mt-1" data-toggle="modal"
+                    data-target="#ErrorsModal">
+                    مشاهده خطاها <small class="badge badge-pill badge-light text-danger"></small>
+                </button>
+                <button id="goToResultTable" class="btn btn-primary rounded mt-1">
+                    محاسبه ماهانه
+                </button>
+            </div>
+        </div>
+        <div class="CustomDataTable DarkDataTable mx-3 mt-5 pb-5">
+            <div id="allDetailsTable_wrapper" class="dataTables_wrapper no-footer">
+                <div class="dataTables_length" id="allDetailsTable_length"><label>تعداد داده جهت نمایش : <select
+                            name="allDetailsTable_length" aria-controls="allDetailsTable" class="">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                            <option value="-1">همه</option>
+                        </select></label></div>
+                <div id="allDetailsTable_filter" class="dataTables_filter"><label>جست و جو :<input type="search"
+                            class="" placeholder="" aria-controls="allDetailsTable"></label></div>
+                <div style="overflow-x: auto;clear: both;">
+                    <table id="allDetailsTable" class="table table-bordered text-center w-100 dataTable no-footer"
+                        role="grid" aria-describedby="allDetailsTable_info" style="width: 0px;">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting" tabindex="0" aria-controls="allDetailsTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label="کد پرسنلی: فعال سازی نمایش به صورت صعودی">کد پرسنلی
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="allDetailsTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label="نام: فعال سازی نمایش به صورت صعودی">نام</th>
+                                <th class="sorting" tabindex="0" aria-controls="allDetailsTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label="نام خانوادگی: فعال سازی نمایش به صورت صعودی">نام
+                                    خانوادگی</th>
+                                <th class="sorting sorting_asc" tabindex="0" aria-controls="allDetailsTable" rowspan="1"
+                                    colspan="1" style="width: 0px;" aria-sort="ascending"
+                                    aria-label="تاریخ: فعال سازی نمایش به صورت نزولی">تاریخ</th>
+                                <th class="sorting" tabindex="0" aria-controls="allDetailsTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label="حضور: فعال سازی نمایش به صورت صعودی">حضور</th>
+                                <th class="sorting" tabindex="0" aria-controls="allDetailsTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label=" اضافه کار: فعال سازی نمایش به صورت صعودی"> اضافه
+                                    کار</th>
+                                <th class="sorting" tabindex="0" aria-controls="allDetailsTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label=" کسری کار: فعال سازی نمایش به صورت صعودی"> کسری کار
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="allDetailsTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label=" مرخصی استحقاقی: فعال سازی نمایش به صورت صعودی">
+                                    مرخصی استحقاقی</th>
+                                <th class="sorting" tabindex="0" aria-controls="allDetailsTable" rowspan="1" colspan="1"
+                                    style="width: 0px;"
+                                    aria-label=" مرخصی بدون حقوق کسر از اضافه کار: فعال سازی نمایش به صورت صعودی"> مرخصی
+                                    بدون حقوق کسر از اضافه کار</th>
+                                <th class="sorting" tabindex="0" aria-controls="allDetailsTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label=" مرخصی استعلاجی: فعال سازی نمایش به صورت صعودی">
+                                    مرخصی استعلاجی</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd">
+                                <td colspan="10" class="dataTables_empty" valign="top">هیچ داده‌ای در جدول وجود ندارد
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="dataTables_info" id="allDetailsTable_info" role="status" aria-live="polite">نمایش 0 داده
+                </div>
+                <div class="dataTables_paginate paging_simple_numbers" id="allDetailsTable_paginate"><a
+                        class="paginate_button previous disabled" aria-controls="allDetailsTable" data-dt-idx="0"
+                        tabindex="-1" id="allDetailsTable_previous">قبلی</a><span></span><a
+                        class="paginate_button next disabled" aria-controls="allDetailsTable" data-dt-idx="1"
+                        tabindex="-1" id="allDetailsTable_next">بعدی</a></div>
+            </div>
+        </div>
+    </section>
+
+
+    <section dir="rtl" id="showFinalResult" style="display: none" class="mt-5 px-2 pb-5">
+        <div class="back mb-3 mx-2 d-flex justify-content-between">
+            <button id="returnToShowFinalResultBtn" class="btn btn-info rounded mt-1">
+                <i class="fa fa-arrow-right"></i>
+                بازگشت
+            </button>
+            <button data-toggle="modal" data-target="#SaveRemainingVacationInDBModal"
+                class="btn btn-success rounded mt-1">
+                ذخیره باقی مانده مرخصی ها
+                <i class="fa fa-save"></i>
+            </button>
+        </div>
+        <div class="CustomDataTable DarkDataTable mx-3 mt-5 pb-5">
+            <div id="showFinalTable_wrapper" class="dataTables_wrapper no-footer">
+                <div class="top">
+                    <div id="showFinalTable_filter" class="dataTables_filter"><label>جست و جو :<input type="search"
+                                class="" placeholder="" aria-controls="showFinalTable"></label></div>
+                    <div class="dataTables_length" id="showFinalTable_length"><label>تعداد داده جهت نمایش : <select
+                                name="showFinalTable_length" aria-controls="showFinalTable" class="">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                                <option value="-1">همه</option>
+                            </select></label></div>
+                    <div class="dt-buttons"> <button class="dt-button buttons-copy buttons-html5" tabindex="0"
+                            aria-controls="showFinalTable" type="button"><span>کپی</span></button> <button
+                            class="dt-button buttons-print" tabindex="0" aria-controls="showFinalTable"
+                            type="button"><span>چاپ</span></button> <button class="dt-button buttons-csv buttons-html5"
+                            tabindex="0" aria-controls="showFinalTable" type="button"><span>CSV</span></button> <button
+                            class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="showFinalTable"
+                            type="button"><span>EXCEL</span></button> </div>
+                </div>
+                <div style="overflow-x: auto;clear: both;">
+                    <table id="showFinalTable" class="table table-bordered text-center w-100 dataTable no-footer"
+                        role="grid" aria-describedby="showFinalTable_info" style="width: 0px;">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting sorting_asc" tabindex="0" aria-controls="showFinalTable" rowspan="1"
+                                    colspan="1" style="width: 0px;" aria-sort="ascending"
+                                    aria-label="کد پرسنلی: فعال سازی نمایش به صورت نزولی">کد پرسنلی</th>
+                                <th class="sorting" tabindex="0" aria-controls="showFinalTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label="نام: فعال سازی نمایش به صورت صعودی">نام</th>
+                                <th class="sorting" tabindex="0" aria-controls="showFinalTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label="نام خانوادگی: فعال سازی نمایش به صورت صعودی">نام
+                                    خانوادگی</th>
+                                <th class="sorting" tabindex="0" aria-controls="showFinalTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label="نوع قرارداد: فعال سازی نمایش به صورت صعودی">نوع
+                                    قرارداد</th>
+                                <th class="sorting" tabindex="0" aria-controls="showFinalTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label="جمع ساعات حضور: فعال سازی نمایش به صورت صعودی">جمع
+                                    ساعات حضور</th>
+                                <th class="sorting" tabindex="0" aria-controls="showFinalTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label="جمع اضافه کار: فعال سازی نمایش به صورت صعودی">جمع
+                                    اضافه کار</th>
+                                <th class="sorting" tabindex="0" aria-controls="showFinalTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label="جمع کسری کار: فعال سازی نمایش به صورت صعودی">جمع
+                                    کسری کار</th>
+                                <th class="sorting" tabindex="0" aria-controls="showFinalTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label="جمع مرخصی استحقاقی: فعال سازی نمایش به صورت صعودی">
+                                    جمع مرخصی استحقاقی</th>
+                                <th class="sorting" tabindex="0" aria-controls="showFinalTable" rowspan="1" colspan="1"
+                                    style="width: 0px;"
+                                    aria-label="جمع مرخصی بدون حقوق کسر از اضافه کار: فعال سازی نمایش به صورت صعودی">جمع
+                                    مرخصی بدون حقوق کسر از اضافه کار</th>
+                                <th class="sorting" tabindex="0" aria-controls="showFinalTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label="جمع مرخصی استعلاجی: فعال سازی نمایش به صورت صعودی">
+                                    جمع مرخصی استعلاجی</th>
+                                <th class="sorting" tabindex="0" aria-controls="showFinalTable" rowspan="1" colspan="1"
+                                    style="width: 0px;"
+                                    aria-label="کسری کار بعد از محاسبه مرخصی: فعال سازی نمایش به صورت صعودی">کسری کار
+                                    بعد از محاسبه مرخصی</th>
+                                <th class="sorting" tabindex="0" aria-controls="showFinalTable" rowspan="1" colspan="1"
+                                    style="width: 0px;"
+                                    aria-label="اضافه کار بعد از محاسبه مرخصی: فعال سازی نمایش به صورت صعودی">اضافه کار
+                                    بعد از محاسبه مرخصی</th>
+                                <th class="sorting" tabindex="0" aria-controls="showFinalTable" rowspan="1" colspan="1"
+                                    style="width: 0px;" aria-label="مرخصی بدون حقوق: فعال سازی نمایش به صورت صعودی">
+                                    مرخصی بدون حقوق</th>
+                                <th class="sorting" tabindex="0" aria-controls="showFinalTable" rowspan="1" colspan="1"
+                                    style="width: 0px;"
+                                    aria-label="مانده مرخصی استحقاقی: فعال سازی نمایش به صورت صعودی">مانده مرخصی
+                                    استحقاقی</th>
+                                <th class="sorting" tabindex="0" aria-controls="showFinalTable" rowspan="1" colspan="1"
+                                    style="width: 0px;"
+                                    aria-label="مانده مرخصی استعلاجی: فعال سازی نمایش به صورت صعودی">مانده مرخصی
+                                    استعلاجی</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd">
+                                <td colspan="15" class="dataTables_empty" valign="top">هیچ داده‌ای در جدول وجود ندارد
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="bottom">
+                    <div class="dataTables_info" id="showFinalTable_info" role="status" aria-live="polite">نمایش 0 داده
+                    </div>
+                    <div class="dataTables_paginate paging_simple_numbers" id="showFinalTable_paginate"><a
+                            class="paginate_button previous disabled" aria-controls="showFinalTable" data-dt-idx="0"
+                            tabindex="-1" id="showFinalTable_previous">قبلی</a><span></span><a
+                            class="paginate_button next disabled" aria-controls="showFinalTable" data-dt-idx="1"
+                            tabindex="-1" id="showFinalTable_next">بعدی</a></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <div class="modal fade" id="ErrorsModal" tabindex="-1" role="dialog" aria-labelledby="ErrorsModalTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title text-right" id="exampleModalLongTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body text-right">
+                    <div class="text-center">
+                        <h3>خطاها</h3>
+                        <hr>
+                    </div>
+                    <div id="ErrorsModal_ErrContainer" class="py-3" style="overflow-y : auto;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="ExcelErrorsModal" tabindex="-1" role="dialog" aria-labelledby="ExcelErrorsModalTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title text-right" id="exampleModalLongTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body text-right">
+                    <div class="text-center">
+                        <h3>خطاها</h3>
+                        <hr>
+                    </div>
+                    <div id="ExcelErrorsModal_ErrContainer" class="py-3" style="overflow-y : auto;">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="SaveEmployeeWorkInfoModal" tabindex="-1" role="dialog"
+        aria-labelledby="SaveEmployeeWorkInfoModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title text-right" id="exampleModalLongTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body text-right">
+                    <div class="text-center">
+                        <h3>ذخیره اطلاعات در سامانه</h3>
+                        <hr>
+                    </div>
+                    <div class="text-center">
+                        <h6>آیا از ذخیره ی اطلاعات در سامانه اطمینان دارید؟</h6>
+                    </div>
+                    <div class="my-4 d-flex justify-content-center">
+                        <button id="SaveEmployeeWorkInfoBtn" class="btn btn-sm btn-success mx-1">
+                            ذخیره
+                        </button>
+                        <button class="btn btn-sm btn-secondary mx-1" type="button" data-dismiss="modal"
+                            aria-label="Close">
+                            بستن
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="LoadEmployeeWorkInfoModal" tabindex="-1" role="dialog"
+        aria-labelledby="LoadEmployeeWorkInfoModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title text-right" id="exampleModalLongTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body text-right">
+                    <div class="text-center">
+                        <h3>بازنشانی از آخرین ذخیره</h3>
+                        <hr>
+                    </div>
+                    <div class="text-center">
+                        <h6>آیا از بازنشانی اطلاعات از آخرین فایل ذخیره شده در سامانه اطمینان دارید؟</h6>
+                    </div>
+                    <div class="my-4 d-flex justify-content-center">
+                        <button id="LoadEmployeeWorkInfoBtn" class="btn btn-sm btn-success mx-1">
+                            بازنشانی
+                        </button>
+                        <button class="CloseModalBtn btn btn-sm btn-secondary mx-1" type="button" data-dismiss="modal"
+                            aria-label="Close">
+                            بستن
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="SaveRemainingVacationInDBModal" tabindex="-1" role="dialog"
+        aria-labelledby="SaveRemainingVacationInDBTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title text-right" id="exampleModalLongTitle"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body text-right">
+                    <div class="text-center">
+                        <h3>ذخیره باقی مانده مرخصی ها در سامانه</h3>
+                        <hr>
+                    </div>
+                    <div class="text-center">
+                        <h6>آیا از ذخیره ی باقی مانده ی مرخصی ها در سامانه اطمینان دارید؟</h6>
+                    </div>
+                    <div class="my-4 d-flex justify-content-center">
+                        <button id="SaveRemainingVacationInDB" class="btn btn-sm btn-success mx-1">
+                            ذخیره
+                        </button>
+                        <button class="btn btn-sm btn-secondary mx-1" type="button" data-dismiss="modal"
+                            aria-label="Close">
+                            بستن
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <script src="./js/jquery-3.4.1.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="./js/fontawesome.min.js"></script>
+    <script src="./js/xls.core.min.js"></script>
+    <script src="./js/xlsx.core.min.js"></script>
+    <script src="./js/JqueryToast/toastr.min.js"></script>
+    <script src="./js/jalaliMoment.js"></script>
+
+    <script src="./js/DataTable/jquery.dataTables.js"></script>
+    <script src="./js/DataTable/dataTables.dataTables.js"></script>
+    <script src="./js/DataTable/dataTables.buttons.js"></script>
+    <script src="./js/DataTable/buttons.html5.js"></script>
+    <script src="./js/DataTable/buttons.print.js"></script>
+    <script src="./js/DataTable/pdfmake.js"></script>
+    <script src="./js/DataTable/vfs_fonts.js"></script>
+
+
+    <script src="./js/hip.js"></script>
+    <script src="./js/Constants.js"></script>
+    <script src="./js/AppServices.js"></script>
+    <script src="./js/WorkTimeDetails.js"></script>
+    <script src="./js/app.js"></script>
+
+
+
+
+</body>
+
+</html>
